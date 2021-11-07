@@ -12,3 +12,5 @@ However if a team member is habitually not completing their tasks, they may be a
 Signed:
 Jack Stubenvoll, Connor Schick, Carlos Paredes, Jeff Shin
 
+Again: Jack Stubenvoll
+
