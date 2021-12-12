@@ -7,14 +7,14 @@
 using namespace std;
 class Tree{
     struct Node{
-        bool is_leaf;
         int elements;
         vector<Node*> child;
-        Node(bool is_leaf, int order): is_leaf(is_leaf){
-          child.reserve(order +1);
+        //default constructor
+        Node();
+        Node(int elem):{
+          elements = elem;
         }
-        Node(const Node& other):is_leaf(other.is_leaf),elements(other.elements){}
-        int order;
+        Node(const Node& other):,elements(other.elements){}
         Node* parent;
     };
   public:
@@ -24,6 +24,7 @@ class Tree{
     ~Tree();
     const Tree& operator=(const Tree& rhs);
   private:
+    Node* root;
     void clear();
     Node* copy(const Node* subroot);
     string temp;
