@@ -10,7 +10,7 @@ Tree::Tree(){
     string textfile = "AnimalKingdom.txt";
     inputfile.open(textfile);
     while(getline(inputfile, temp)){
-        for(int i = 0; i < 1593758; i++){
+        for(int i = 0; i < SIZE; i++){
             storage[i] = temp;
         }
         int tmp = 0;
@@ -25,7 +25,7 @@ Tree::Tree(){
     Node* currOrder;
     Node* currFamily;
     Node* currGenus;
-    for (unsigned i = 0; i < 1593758; i++) {
+    for (unsigned i = 0; i < SIZE; i++) {
         std::string line = storage[i];
         size_t startInd = line.find("[");
         size_t endInd = line.find("]");
@@ -38,49 +38,61 @@ Tree::Tree(){
             case "phylum":
                 //Create node representing phylum
                 //add phylum to list of children of most recent kingdom
+                //set that as parent
                 //set this phylum as most recent
                 Node* newPhylum(i);
                 currKingdom->child.push_back(newPhylum);
+                newPhylum->parent = currKingdom
                 currPhylum = newPhylum;
                 break;
             case "class":
                 //create node representing class
                 //add class to lst of children of most recent phylum
+                //set that as parent
                 //set this class as most recent
                 Node* newClass(i);
                 currPhylum->child.push_back(newClass);
+                newClass->parent = currPhylum;
                 currClass = newClass;
                 break;
             case "order":
                 //create node representing order
                 //add order to lst of children of most recent class
+                //set that as parent
                 //set this order as most recent
                 Node* newOrder(i);
                 currClass->child.push_back(newOrder);
+                newOrder->parent = currClass;
                 currOrder = newOrder;
                 break;
             case "family":
                 //create node representing family
                 //add family to lst of children of most recent order
+                //set that as parent
                 //set this family as most recent
                 Node* newFamily(i);
                 currOrder->child.push_back(newFamily);
+                newFamily->parent = currOrder;
                 currFamily = newFamily;
                 break;
             case "genus":
                 //create node representing genus
                 //add genus to lst of children of most recent family
+                //set that as parent
                 //set this genus as most recent
                 Node* newGenus(i);
                 currFamily->child.push_back(newGenus);
+                newGenus->parent = currFamily;
                 currGenus = newGenus;
                 break;
             case "species":
                 //create node representing species
                 //add species to lst of children of most recent genus
+                //set that as parent
                 //nothing below species
                 Node* newSpecies(i);
                 currGenus->child.push_back(newSpecies);
+                newSpecies->parent = currGenus;
                 break;
         
     }
@@ -110,10 +122,14 @@ Node* Tree::findNode(string name) {
     q.push(root);
     while (!q.empty()) {
         Node* temp = q.front();
-        if (storage[temp->element].find(name) != string::npos)
+        if (storage[temp->element].find(name) != string::npos) {
+            return temp;
+        }
         for (unsigned i = 0; i < temp->child.size(); i++) {
             q.push(temp->child.at(i));
         }
 
     }
+    Node* notFound(SIZE + 1);
+    return notFound;
 }
