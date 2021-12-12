@@ -1,10 +1,10 @@
 #pragma once
 #include "mostConnected.h"
-#include "tree"
+#include "tree.h"
 #include <queue>
 
 string mostConnected(Node* root) {
-    int largest = root->children.size();
+    int largest = root->child.size();
     Node* mostConnectedNode = root;
     std::queue<Node*> q;
     q.push(root);
@@ -15,7 +15,7 @@ string mostConnected(Node* root) {
             mostConnectedNode = temp;
         }
         for (unsigned i = 0; i < temp->size(); i++) {
-            q.push(temp->children.at(i));
+            q.push(temp->child.at(i));
         }
 
     }
