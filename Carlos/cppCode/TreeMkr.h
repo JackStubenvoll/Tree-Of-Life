@@ -23,6 +23,7 @@ class Tree{
     Tree(const Tree& other);
     ~Tree();
     const Tree& operator=(const Tree& rhs);
+    string mostConnected(Node* root);
   private:
     Node* root;
     void clear();

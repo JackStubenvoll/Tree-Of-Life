@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <queue>
 using namespace std;
 Tree::Tree(){
     ifstream inputfile;
@@ -84,3 +85,22 @@ Tree::Tree(){
         
     }
 }
+
+string Tree::mostConnected(Node* root) {
+    int largest = root->child.size();
+    Node* mostConnectedNode = root;
+    std::queue<Node*> q;
+    q.push(root);
+    while (!q.empty()) {
+        Node* temp = q.front();
+        if (temp->size() > largest) {
+            largest = temp->size();
+            mostConnectedNode = temp;
+        }
+        for (unsigned i = 0; i < temp->size(); i++) {
+            q.push(temp->child.at(i));
+        }
+
+    }
+    return storage[mostConnectedNode->elements];
+} 
