@@ -4,7 +4,7 @@
 #include <string>
 #include <sstream>
 using namespace std;
-Tree::Tree(int order){
+Tree::Tree(){
     ifstream inputfile;
     string textfile = "AnimalKingdom.txt";
     inputfile.open(textfile);
