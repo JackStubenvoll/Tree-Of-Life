@@ -4,8 +4,10 @@
 #include <string>
 #include <sstream>
 using namespace std;
-Tree::Tree(int order, ifstream inputfile){
-    inputfile.open("AnimalKingdom.txt");
+Tree::Tree(int order){
+    ifstream inputfile;
+    string textfile = "AnimalKingdom.txt";
+    inputfile.open(textfile);
     while(getline(inputfile, temp)){
         for(int i = 0; i < 1593758; i++){
             storage[i] = temp;
@@ -14,4 +16,8 @@ Tree::Tree(int order, ifstream inputfile){
         cout<< "got line " << temp << " " << endl;
         tmp++;
     }
+}
+Tree::~Tree(){
+}
+Tree::Tree(const Tree& other){
 }

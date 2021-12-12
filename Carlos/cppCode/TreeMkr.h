@@ -1,4 +1,5 @@
-//#pragma once
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -18,7 +19,7 @@ class Tree{
     };
   public:
     Tree();
-    Tree(int order, ifstream inputfile);
+    Tree(int order);
     Tree(const Tree& other);
     ~Tree();
     const Tree& operator=(const Tree& rhs);
