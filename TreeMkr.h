@@ -11,19 +11,19 @@ class Tree{
         vector<Node*> child;
         //default constructor
         Node();
-        Node(int elem):{
+        Node(int elem){
           elements = elem;
         }
-        Node(const Node& other):,elements(other.elements){}
+        Node(const Node& other):elements(other.elements){}
         Node* parent;
     };
   public:
-    Tree();
     Tree();
     Tree(const Tree& other);
     ~Tree();
     const Tree& operator=(const Tree& rhs);
     string mostConnected(Node* root);
+    Node* findNode(string Name);
   private:
     Node* root;
     void clear();

@@ -93,14 +93,27 @@ string Tree::mostConnected(Node* root) {
     q.push(root);
     while (!q.empty()) {
         Node* temp = q.front();
-        if (temp->size() > largest) {
-            largest = temp->size();
+        if (temp->child.size() > largest) {
+            largest = temp->child.size();
             mostConnectedNode = temp;
         }
-        for (unsigned i = 0; i < temp->size(); i++) {
+        for (unsigned i = 0; i < temp->child.size(); i++) {
             q.push(temp->child.at(i));
         }
 
     }
     return storage[mostConnectedNode->elements];
 } 
+
+Node* Tree::findNode(string name) {
+    std::queue<Node*> q;
+    q.push(root);
+    while (!q.empty()) {
+        Node* temp = q.front();
+        if (storage[temp->element].find(name) != string::npos)
+        for (unsigned i = 0; i < temp->child.size(); i++) {
+            q.push(temp->child.at(i));
+        }
+
+    }
+}
