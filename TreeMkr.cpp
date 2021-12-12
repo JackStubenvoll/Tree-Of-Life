@@ -30,70 +30,65 @@ Tree::Tree(){
         size_t startInd = line.find("[");
         size_t endInd = line.find("]");
         std::string level = line.substr(startInd, endInd - startInd);
-        switch (level):
-            case "kingdom":
-                //only kingdom is the first line
-                currKingdom = root;
-                break;
-            case "phylum":
-                //Create node representing phylum
-                //add phylum to list of children of most recent kingdom
-                //set that as parent
-                //set this phylum as most recent
-                Node* newPhylum(i);
-                currKingdom->child.push_back(newPhylum);
-                newPhylum->parent = currKingdom
-                currPhylum = newPhylum;
-                break;
-            case "class":
-                //create node representing class
-                //add class to lst of children of most recent phylum
-                //set that as parent
-                //set this class as most recent
-                Node* newClass(i);
-                currPhylum->child.push_back(newClass);
-                newClass->parent = currPhylum;
-                currClass = newClass;
-                break;
-            case "order":
-                //create node representing order
-                //add order to lst of children of most recent class
-                //set that as parent
-                //set this order as most recent
-                Node* newOrder(i);
-                currClass->child.push_back(newOrder);
-                newOrder->parent = currClass;
-                currOrder = newOrder;
-                break;
-            case "family":
-                //create node representing family
-                //add family to lst of children of most recent order
-                //set that as parent
-                //set this family as most recent
-                Node* newFamily(i);
-                currOrder->child.push_back(newFamily);
-                newFamily->parent = currOrder;
-                currFamily = newFamily;
-                break;
-            case "genus":
-                //create node representing genus
-                //add genus to lst of children of most recent family
-                //set that as parent
-                //set this genus as most recent
-                Node* newGenus(i);
-                currFamily->child.push_back(newGenus);
-                newGenus->parent = currFamily;
-                currGenus = newGenus;
-                break;
-            case "species":
-                //create node representing species
-                //add species to lst of children of most recent genus
-                //set that as parent
-                //nothing below species
-                Node* newSpecies(i);
-                currGenus->child.push_back(newSpecies);
-                newSpecies->parent = currGenus;
-                break;
+        if (level == "kingdom") {
+            //only kingdom is the first line
+            currKingdom = root;
+            break;
+        } else if (level == "phylum") {
+            //Create node representing phylum
+            //add phylum to list of children of most recent kingdom
+            //set that as parent
+            //set this phylum as most recent
+            Node* newPhylum(i);
+            currKingdom->child.push_back(newPhylum);
+            newPhylum->parent = currKingdom
+            currPhylum = newPhylum;
+        } else if (level == "class") {
+            //create node representing class
+            //add class to lst of children of most recent phylum
+            //set that as parent
+            //set this class as most recent
+            Node* newClass(i);
+            currPhylum->child.push_back(newClass);
+            newClass->parent = currPhylum;
+            currClass = newClass;
+        } else if (level == "order") {
+            //create node representing order
+            //add order to lst of children of most recent class
+            //set that as parent
+            //set this order as most recent
+            Node* newOrder(i);
+            currClass->child.push_back(newOrder);
+            newOrder->parent = currClass;
+            currOrder = newOrder;
+        } else if (level == "family") {
+            //create node representing family
+            //add family to lst of children of most recent order
+            //set that as parent
+            //set this family as most recent
+            Node* newFamily(i);
+            currOrder->child.push_back(newFamily);
+            newFamily->parent = currOrder;
+            currFamily = newFamily;
+        } else if (level == "genus") {
+            //create node representing genus
+            //add genus to lst of children of most recent family
+            //set that as parent
+            //set this genus as most recent
+            Node* newGenus(i);
+            currFamily->child.push_back(newGenus);
+            newGenus->parent = currFamily;
+            currGenus = newGenus;
+            break;
+        } else if (level == "species") {
+            //create node representing species
+            //add species to lst of children of most recent genus
+            //set that as parent
+            //nothing below species
+            Node* newSpecies(i);
+            currGenus->child.push_back(newSpecies);
+            newSpecies->parent = currGenus;
+        }
         
     }
 }
