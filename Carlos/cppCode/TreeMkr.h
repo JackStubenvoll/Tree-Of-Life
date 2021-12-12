@@ -1,4 +1,4 @@
-#pragma once
+//#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
@@ -25,4 +25,6 @@ class Tree{
   private:
     void clear();
     Node* copy(const Node* subroot);
+    string temp;
+    string storage[1593758];
 };
