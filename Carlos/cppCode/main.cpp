@@ -1,4 +1,5 @@
 #include "TreeMkr.h"
+#include "mostConnected.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -6,5 +7,6 @@
 using namespace std;
 int main(){
     ifstream inputfile;
-    Tree Test(3);
+    Tree Test();
+
 }
