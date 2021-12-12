@@ -19,7 +19,7 @@ class Tree{
     };
   public:
     Tree();
-    Tree(int order);
+    Tree();
     Tree(const Tree& other);
     ~Tree();
     const Tree& operator=(const Tree& rhs);

@@ -4,16 +4,10 @@
 #include <string>
 #include <sstream>
 using namespace std;
-<<<<<<< HEAD
-Tree::Tree(int order, ifstream inputfile){
-    inputfile.open("AnimalKingdom.txt");
-    //convert text fle to an array of strings, each line is one entry
-=======
-Tree::Tree(int order){
+Tree::Tree(){
     ifstream inputfile;
     string textfile = "AnimalKingdom.txt";
     inputfile.open(textfile);
->>>>>>> 7c8627ce74f04dabd1862c947f532ebb49a02868
     while(getline(inputfile, temp)){
         for(int i = 0; i < 1593758; i++){
             storage[i] = temp;
