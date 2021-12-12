@@ -83,3 +83,7 @@ Tree::Tree(int order, ifstream inputfile){
         
     }
 }
+Tree::~Tree(){
+}
+Tree::Tree(const Tree& other){
+}
