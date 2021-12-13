@@ -186,6 +186,9 @@ Tree::Node* Tree::findNode(string name) {
 int Tree::findDistance(string name1, string name2) {
     Node* node1 = findNode(name1);
     Node* node2 = findNode(name2);
+    if (node1 == NULL || node2 == NULL) {
+        return -1;
+    }
     std::queue<Node*> nodeq; //queue that holds nodes
     std::queue<int> distq; //queue that holds the distance of the node at the same spot in nodeq
     std::vector<Node*> visitedNodes; // vector that holds all nodes visited so far
