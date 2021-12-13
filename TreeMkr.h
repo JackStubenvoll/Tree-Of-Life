@@ -24,6 +24,7 @@ class Tree{
     const Tree& operator=(const Tree& rhs);
     string mostConnected(Node* root);
     Node* findNode(string name);
+    string find(string name);
     int findDistance(string name1, string name2);
     Node* lowestCommonAncestor(string name1, string name2);
     //const int SIZE = 1593758;
