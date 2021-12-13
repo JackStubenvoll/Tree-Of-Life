@@ -129,7 +129,7 @@ string Tree::mostConnected(Tree::Node* subroot) {
 string Tree::find(string name) {
     Node* node = findNode(name);
     if (node == NULL) {
-        return "";
+        return "Query not found";
     }
     return storage[node->elements];
 }
@@ -251,7 +251,7 @@ string Tree::lowestCommonAncestor(string name1, string name2) {
     Node* node1 = findNode(name1);
     Node* node2 = findNode(name2);
     if (node1 == NULL || node2 == NULL) {
-        return "";
+        return "one of these queries does not exist";
     }
     if (name1 == name2) {
         return storage[node1->elements];
