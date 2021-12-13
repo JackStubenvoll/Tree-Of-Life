@@ -14,6 +14,7 @@ using namespace std;
 // };
 Tree::Tree(){
     ifstream inputfile;
+    std::cout << "Point 1" << std::endl;
     //string textfile = "AnimalKingdom.txt";
     inputfile.open("AnimalKingdom.txt");
     while(getline(inputfile, temp)){
@@ -25,6 +26,7 @@ Tree::Tree(){
         tmp++;
  
    }
+   std::cout << "Point 2" << std::endl;
     //read array into tree structure
     root = new Node(0);
     Node* currKingdom = NULL;
@@ -33,11 +35,13 @@ Tree::Tree(){
     Node* currOrder = NULL;
     Node* currFamily = NULL;
     Node* currGenus = NULL;
+    std::cout << "Point 3" << std::endl;
     for (unsigned i = 0; i < 1593758; i++) {
+        //std::cout << i << std::endl;
         std::string line = storage[i];
         size_t startInd = line.find("[");
         size_t endInd = line.find("]");
-        std::string level = line.substr(startInd, endInd - startInd);
+        std::string level = line.substr(startInd + 1, endInd - startInd);
         if (level == "kingdom") {
             //only kingdom is the first line
             currKingdom = root;
@@ -98,6 +102,7 @@ Tree::Tree(){
         }
         
     }
+    std::cout << "Point 4" << std::endl;
 }
 
 string Tree::mostConnected(Tree::Node* subroot) {
