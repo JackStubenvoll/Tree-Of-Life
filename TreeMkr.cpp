@@ -7,6 +7,7 @@
 using namespace std;
 Tree::Tree(){
     ifstream inputfile;
+    std::cout << "Point 1" << std::endl;
     inputfile.open("TreeSlim/AnimalKingdom.txt");
     string line;
     int counter = 0;
@@ -127,6 +128,7 @@ string Tree::mostConnected(Tree::Node* subroot) {
  * then returns the corrresponding string
  */ 
 string Tree::find(string name) {
+    std::cout << "calling find" << std:: endl;
     Node* node = findNode(name);
     return storage[node->elements];
 }
