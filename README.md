@@ -17,7 +17,7 @@ Contributors: Connor Schick (cschick3), Carlos Paredes (cfp3), Jack Stubenvoll (
 - - - -
 ## Overview
 The source of the data set is acquired from https://www.catalogueoflife.org/data/download. 
-To run the file, we used make main to compile the code and ./main to run main which includes the functions. Make test while compile the tests and ./test will run the tests.
+To run the file, we used make to compile the code and ./treemaker to run main which includes the functions. Make test while compile the tests and ./test will run the tests.
 
 < Full instructions on how to build and run your executable, including how to define the input data and output location for each method. >
 
