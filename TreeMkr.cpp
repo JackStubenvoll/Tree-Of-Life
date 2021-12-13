@@ -250,6 +250,9 @@ string Tree::lowestCommonAncestor(string name1, string name2) {
     
     Node* node1 = findNode(name1);
     Node* node2 = findNode(name2);
+    if (node1 == NULL || node2 == NULL) {
+        return "";
+    }
     if (name1 == name2) {
         return storage[node1->elements];
     }
