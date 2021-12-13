@@ -44,9 +44,9 @@ Tree::Tree(){
         std::string thisLine = storage[i];
         size_t startInd = thisLine.find("[");
         size_t endInd = thisLine.find("]");
-        std::cout << "startInd: " << startInd << " endInd: " << endInd << std::endl;
+        //std::cout << "startInd: " << startInd << " endInd: " << endInd << std::endl;
         std::string level = thisLine.substr(startInd + 1, endInd - startInd - 1);
-        std::cout << level << std::endl;
+        //std::cout << level << std::endl;
         if (level == "kingdom") {
             //only kingdom is the first line
             currKingdom = root;
@@ -102,7 +102,7 @@ Tree::Tree(){
             //add species to lst of children of most recent genus
             //set that as parent
             //nothing below species
-            std::cout << "~~~~~~~~~~~~~~" << std::endl;
+            //std::cout << "~~~~~~~~~~~~~~" << std::endl;
             Node* newSpecies = new Node(i);
             currGenus->child.push_back(newSpecies);
             newSpecies->parent = currGenus;
@@ -170,6 +170,8 @@ Tree::Node* Tree::findNode(string name) {
 int Tree::findDistance(string name1, string name2) {
     Node* node1 = findNode(name1);
     Node* node2 = findNode(name2);
+    std::cout << node1->elements << std::endl;
+    std::cout << node2->elements << std::endl;
     std::queue<Node*> nodeq;
     std::queue<int> distq;
     std::vector<Node*> visitedNodes;
@@ -177,8 +179,12 @@ int Tree::findDistance(string name1, string name2) {
     distq.push(0);
     while(!nodeq.empty()) {
         Node* curr = nodeq.front();
+        std::cout << curr->elements << std::endl;
+        //std::cout << "basoivba" << std::endl;
         int currDist = distq.front();
+        std::cout << "after distq" << std::endl;
         string currData = storage[curr->elements];
+        std::cout << "after currData" << std::endl;
         bool visited = false;
         for (unsigned i = 0; i < visitedNodes.size(); i++) {
             string visitData = storage[visitedNodes[i]->elements];
@@ -198,13 +204,14 @@ int Tree::findDistance(string name1, string name2) {
             distq.push(currDist + 1);
             for (unsigned i = 0; i < curr->child.size(); i++) {
                 nodeq.push(curr->child[i]);
+                std::cout << storage[curr->child[i]->elements] << std::endl;
                 distq.push(currDist+1);
             }
             
         }
         nodeq.pop();
         distq.pop();
-        
+        std::cout << "popped" << std::endl;
 
     }
     return -1;
