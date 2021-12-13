@@ -214,7 +214,7 @@ int Tree::findDistance(string name1, string name2) {
             if (curr != root) { 
                 //if the current node is the root then it doesn't have a parent to add
                 nodeq.push(curr->parent);
-            distq.push(currDist + 1);
+                distq.push(currDist + 1);
             }    
             for (unsigned i = 0; i < curr->child.size(); i++) {
                 nodeq.push(curr->child[i]);
