@@ -171,9 +171,10 @@ int Tree::findDistance(string name1, string name2) {
         }
         nodeq.pop();
         distq.pop();
-        return -1;
+        
 
     }
+    return -1;
 }
 
 Tree::Node* Tree::lowestCommonAncestor(string name1, string name2) {
