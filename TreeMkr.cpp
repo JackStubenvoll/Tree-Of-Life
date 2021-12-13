@@ -16,16 +16,18 @@ Tree::Tree(){
     ifstream inputfile;
     std::cout << "Point 1" << std::endl;
     //string textfile = "AnimalKingdom.txt";
-    inputfile.open("AnimalKingdom.txt");
-    while(getline(inputfile, temp)){
-        for(int i = 0; i < 1593758; i++){
-            storage[i] = temp;
-        }
-        int tmp = 0;
-        cout<< "got line " << temp << " " << endl;
-        tmp++;
+    inputfile.open("Carlos/AnimalKingdom.txt");
+    string line;
+    int counter = 0;
+    while(getline(inputfile, line)){
+        //std::cout << "in while loop" << std::endl;
+        storage[counter] = line;
+        //cout<< "got line " << line << " " << endl;
+        counter++;
  
    }
+   size = counter;
+   inputfile.close();
    std::cout << "Point 2" << std::endl;
     //read array into tree structure
     root = new Node(0);
@@ -36,12 +38,15 @@ Tree::Tree(){
     Node* currFamily = NULL;
     Node* currGenus = NULL;
     std::cout << "Point 3" << std::endl;
-    for (unsigned i = 0; i < 1593758; i++) {
+    for (unsigned i = 0; i < (unsigned int) size; i++) {
+        //std::cout << "size: " << size << std::endl;
         //std::cout << i << std::endl;
-        std::string line = storage[i];
-        size_t startInd = line.find("[");
-        size_t endInd = line.find("]");
-        std::string level = line.substr(startInd + 1, endInd - startInd);
+        std::string thisLine = storage[i];
+        size_t startInd = thisLine.find("[");
+        size_t endInd = thisLine.find("]");
+        //std::cout << "startInd: " << startInd << " endInd: " << endInd << std::endl;
+        std::string level = thisLine.substr(startInd + 1, endInd - startInd - 1);
+        //std::cout << level << std::endl;
         if (level == "kingdom") {
             //only kingdom is the first line
             currKingdom = root;
@@ -51,6 +56,8 @@ Tree::Tree(){
             //set that as parent
             //set this phylum as most recent
             Node* newPhylum = new Node(i);
+            
+            //std::cout << storage[currKingdom->elements] << " has a new child: " << storage[i] << std::endl;
             currKingdom->child.push_back(newPhylum);
             newPhylum->parent = currKingdom;
             currPhylum = newPhylum;
@@ -90,18 +97,22 @@ Tree::Tree(){
             currFamily->child.push_back(newGenus);
             newGenus->parent = currFamily;
             currGenus = newGenus;
-            break;
         } else if (level == "species") {
             //create node representing species
             //add species to lst of children of most recent genus
             //set that as parent
             //nothing below species
+            //std::cout << "~~~~~~~~~~~~~~" << std::endl;
             Node* newSpecies = new Node(i);
             currGenus->child.push_back(newSpecies);
             newSpecies->parent = currGenus;
         }
         
     }
+    std::cout << storage[0] << std::endl;
+    std::cout << storage[1] << std::endl;
+    std::cout << storage[2] << std::endl;
+    std::cout << storage[3] << std::endl;
     std::cout << "Point 4" << std::endl;
 }
 
@@ -136,22 +147,31 @@ Tree::Node* Tree::findNode(string name) {
     q.push(root);
     while (!q.empty()) {
         Node* temp = q.front();
+        // std::cout << "bollocks" << std::endl;
+        // std::cout << storage[temp->elements] << std::endl;
+        // std::cout << "bollocks 2" << std::endl;
+        // std::cout << storage[temp->elements].find(name) << std::endl;
+        // std::cout << string::npos << std::endl;
         if (storage[temp->elements].find(name) != string::npos) {
+            //std::cout << "returning" << std::endl;
             return temp;
         }
+        //std::cout << "size of child array: " << temp->child.size() << std::endl;
         for (unsigned i = 0; i < temp->child.size(); i++) {
-            q.push(temp->child.at(i));
+            q.push(temp->child[i]);
         }
         q.pop();
 
     }
-    Node* notFound = new Node(1593759);
+    Node* notFound = new Node(-1);
     return notFound;
 }
 
 int Tree::findDistance(string name1, string name2) {
     Node* node1 = findNode(name1);
     Node* node2 = findNode(name2);
+    std::cout << node1->elements << std::endl;
+    std::cout << node2->elements << std::endl;
     std::queue<Node*> nodeq;
     std::queue<int> distq;
     std::vector<Node*> visitedNodes;
@@ -159,8 +179,12 @@ int Tree::findDistance(string name1, string name2) {
     distq.push(0);
     while(!nodeq.empty()) {
         Node* curr = nodeq.front();
+        std::cout << curr->elements << std::endl;
+        //std::cout << "basoivba" << std::endl;
         int currDist = distq.front();
+        std::cout << "after distq" << std::endl;
         string currData = storage[curr->elements];
+        std::cout << "after currData" << std::endl;
         bool visited = false;
         for (unsigned i = 0; i < visitedNodes.size(); i++) {
             string visitData = storage[visitedNodes[i]->elements];
@@ -180,13 +204,14 @@ int Tree::findDistance(string name1, string name2) {
             distq.push(currDist + 1);
             for (unsigned i = 0; i < curr->child.size(); i++) {
                 nodeq.push(curr->child[i]);
+                std::cout << storage[curr->child[i]->elements] << std::endl;
                 distq.push(currDist+1);
             }
             
         }
         nodeq.pop();
         distq.pop();
-        
+        std::cout << "popped" << std::endl;
 
     }
     return -1;

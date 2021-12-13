@@ -27,9 +27,8 @@ class Tree{
     int findDistance(string name1, string name2);
     Node* lowestCommonAncestor(string name1, string name2);
     Node* root;
-    //const int SIZE = 1593758;
   private:
-    
+    int size;
     void clear();
     Node* copy(const Node* subroot);
     string temp;

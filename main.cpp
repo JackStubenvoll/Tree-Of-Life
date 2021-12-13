@@ -9,6 +9,8 @@ int main(){
     std::cout << " cock and ball torture 1" << std::endl;
     Tree* test = new Tree();
     std::cout << "cock and ball torture 2" << std::endl;
-    std::cout << test->find("Animalia") << std::endl;
+    std::cout << test->find("Apororhynchus aculeatus") << std::endl;
+    std::cout << test->mostConnected(test->root) << std::endl;
+    std::cout << test->findDistance("Animalia", "Acanthocephala Rudolphi") << std::endl;
     return 0;
 }
