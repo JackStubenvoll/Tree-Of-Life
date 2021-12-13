@@ -7,25 +7,26 @@
 using namespace std;
 Tree::Tree(){
     ifstream inputfile;
-    string textfile = "AnimalKingdom.txt";
-    inputfile.open(textfile);
+    //string textfile = "AnimalKingdom.txt";
+    inputfile.open("AnimalKingdom.txt");
     while(getline(inputfile, temp)){
-        for(int i = 0; i < SIZE; i++){
+        for(int i = 0; i < 1593758; i++){
             storage[i] = temp;
         }
         int tmp = 0;
         cout<< "got line " << temp << " " << endl;
         tmp++;
-    }
+ 
+   }
     //read array into tree structure
     root = new Node(0);
-    Node* currKingdom;
-    Node* currPhylum;
-    Node* currClass;
-    Node* currOrder;
-    Node* currFamily;
-    Node* currGenus;
-    for (unsigned i = 0; i < SIZE; i++) {
+    Node* currKingdom = NULL;
+    Node* currPhylum = NULL;
+    Node* currClass = NULL;
+    Node* currOrder = NULL;
+    Node* currFamily = NULL;
+    Node* currGenus = NULL;
+    for (unsigned i = 0; i < 1593758; i++) {
         std::string line = storage[i];
         size_t startInd = line.find("[");
         size_t endInd = line.find("]");
@@ -33,22 +34,21 @@ Tree::Tree(){
         if (level == "kingdom") {
             //only kingdom is the first line
             currKingdom = root;
-            break;
         } else if (level == "phylum") {
             //Create node representing phylum
             //add phylum to list of children of most recent kingdom
             //set that as parent
             //set this phylum as most recent
-            Node* newPhylum(i);
+            Node* newPhylum = new Node(i);
             currKingdom->child.push_back(newPhylum);
-            newPhylum->parent = currKingdom
+            newPhylum->parent = currKingdom;
             currPhylum = newPhylum;
         } else if (level == "class") {
             //create node representing class
             //add class to lst of children of most recent phylum
             //set that as parent
             //set this class as most recent
-            Node* newClass(i);
+            Node* newClass = new Node(i);
             currPhylum->child.push_back(newClass);
             newClass->parent = currPhylum;
             currClass = newClass;
@@ -57,7 +57,7 @@ Tree::Tree(){
             //add order to lst of children of most recent class
             //set that as parent
             //set this order as most recent
-            Node* newOrder(i);
+            Node* newOrder = new Node(i);
             currClass->child.push_back(newOrder);
             newOrder->parent = currClass;
             currOrder = newOrder;
@@ -66,7 +66,7 @@ Tree::Tree(){
             //add family to lst of children of most recent order
             //set that as parent
             //set this family as most recent
-            Node* newFamily(i);
+            Node* newFamily = new Node(i);
             currOrder->child.push_back(newFamily);
             newFamily->parent = currOrder;
             currFamily = newFamily;
@@ -75,7 +75,7 @@ Tree::Tree(){
             //add genus to lst of children of most recent family
             //set that as parent
             //set this genus as most recent
-            Node* newGenus(i);
+            Node* newGenus = new Node(i);
             currFamily->child.push_back(newGenus);
             newGenus->parent = currFamily;
             currGenus = newGenus;
@@ -85,7 +85,7 @@ Tree::Tree(){
             //add species to lst of children of most recent genus
             //set that as parent
             //nothing below species
-            Node* newSpecies(i);
+            Node* newSpecies = new Node(i);
             currGenus->child.push_back(newSpecies);
             newSpecies->parent = currGenus;
         }
@@ -112,12 +112,12 @@ string Tree::mostConnected(Node* root) {
     return storage[mostConnectedNode->elements];
 } 
 
-Node* Tree::findNode(string name) {
+Tree::Node* Tree::findNode(string name) {
     std::queue<Node*> q;
     q.push(root);
     while (!q.empty()) {
         Node* temp = q.front();
-        if (storage[temp->element].find(name) != string::npos) {
+        if (storage[temp->elements].find(name) != string::npos) {
             return temp;
         }
         for (unsigned i = 0; i < temp->child.size(); i++) {
@@ -125,6 +125,6 @@ Node* Tree::findNode(string name) {
         }
 
     }
-    Node* notFound(SIZE + 1);
+    Node* notFound = new Node(1593759);
     return notFound;
 }

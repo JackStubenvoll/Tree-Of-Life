@@ -23,13 +23,13 @@ class Tree{
     ~Tree();
     const Tree& operator=(const Tree& rhs);
     string mostConnected(Node* root);
-    Node* findNode(string Name);
-    const int SIZE = 1593758;
+    Node* findNode(string name);
+    //const int SIZE = 1593758;
   private:
     Node* root;
     void clear();
     Node* copy(const Node* subroot);
     string temp;
-    string storage[SIZE];
+    string storage[1593758];
     
 };
