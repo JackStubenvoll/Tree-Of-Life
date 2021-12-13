@@ -116,6 +116,11 @@ string Tree::mostConnected(Node* root) {
     return storage[mostConnectedNode->elements];
 } 
 
+string Tree::find(string name) {
+    Node* node = findNode(name);
+    return storage[node->elements];
+}
+
 Tree::Node* Tree::findNode(string name) {
     std::queue<Node*> q;
     q.push(root);
