@@ -128,6 +128,9 @@ string Tree::mostConnected(Tree::Node* subroot) {
  */ 
 string Tree::find(string name) {
     Node* node = findNode(name);
+    if (node == NULL) {
+        return "";
+    }
     return storage[node->elements];
 }
 
