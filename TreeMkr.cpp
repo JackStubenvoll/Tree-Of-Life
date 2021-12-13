@@ -179,7 +179,7 @@ Node* Tree::lowestCommonAncestor(string name1, string name2) {
     
     Node* node1 = findNode(name1);
     Node* node2 = findNode(name2);
-    if (name1 = name2) {
+    if (name1 == name2) {
         return node1;
     }
     std::vector<Node*> node1Ancestors;
