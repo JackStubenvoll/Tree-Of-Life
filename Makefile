@@ -1,5 +1,6 @@
 #Executable names:
 EXE = treemaker
+TEST = test
 
 #Add all object files needed for compiling:
 
