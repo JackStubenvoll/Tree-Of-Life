@@ -1,5 +1,4 @@
 #pragma once
-
 #include <iostream>
 #include <vector>
 #include <string>
@@ -22,17 +21,20 @@ class Tree{
     Tree(const Tree& other);
     ~Tree();
     const Tree& operator=(const Tree& rhs);
-    string mostConnected(Node* root);
+    string mostConnected(Node* subroot);
     Node* findNode(string name);
     string find(string name);
     int findDistance(string name1, string name2);
     Node* lowestCommonAncestor(string name1, string name2);
+    Node* root;
     //const int SIZE = 1593758;
   private:
-    Node* root;
+    
     void clear();
     Node* copy(const Node* subroot);
     string temp;
     string storage[1593758];
     
 };
+
+#include "TreeMkr.cpp"

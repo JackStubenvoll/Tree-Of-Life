@@ -6,6 +6,6 @@
 using namespace std;
 int main(){
     ifstream inputfile;
-    Tree Test();
-    std::cout << Test.find("Animalia"); << std::endl;
+    Tree::Tree* test = new Tree::Tree();
+    std::cout << test->find("Animalia") << std::endl;
 }
