@@ -5,6 +5,13 @@
 #include <sstream>
 #include <queue>
 using namespace std;
+// int main {
+//     Tree::Tree* test;
+//     test = new Tree();
+//     std::cout << "cock and ball torture" << std::endl;
+//     std::cout << test->find("Animalia") << std::endl;
+//     return 0;
+// };
 Tree::Tree(){
     ifstream inputfile;
     //string textfile = "AnimalKingdom.txt";
@@ -114,6 +121,7 @@ string Tree::mostConnected(Tree::Node* subroot) {
 } 
 
 string Tree::find(string name) {
+    std::cout << "calling find" << std:: endl;
     Node* node = findNode(name);
     return storage[node->elements];
 }
