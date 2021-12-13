@@ -266,3 +266,18 @@ string Tree::lowestCommonAncestor(string name1, string name2) {
     }
     return storage[root->elements];
 }
+
+Tree::~Tree() {
+    clear(root);
+}
+
+void Tree::clear(Tree::Node* subroot) {
+    if (subroot == NULL) {
+        return;
+    }
+    for (unsigned i = 0; i < subroot->child.size(); i++) {
+        clear(subroot->child[i]);
+    }
+
+    delete subroot;
+}

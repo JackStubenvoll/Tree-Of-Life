@@ -33,7 +33,7 @@ class Tree{
     Node* copy(const Node* subroot);
     string temp;
     string storage[1593758];
-    
+    void clear(Node* subroot);
 };
 
 //#include "TreeMkr.cpp"
