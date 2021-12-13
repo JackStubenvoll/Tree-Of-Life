@@ -16,8 +16,9 @@ Tree::Tree(){
     ifstream inputfile;
     std::cout << "Point 1" << std::endl;
     //string textfile = "AnimalKingdom.txt";
-    inputfile.open("AnimalKingdom.txt");
+    inputfile.open("Carlos/AnimalKingdom.txt");
     while(getline(inputfile, temp)){
+        //std::cout << "in while loop" << std::endl;
         for(int i = 0; i < 1593758; i++){
             storage[i] = temp;
         }
@@ -26,6 +27,7 @@ Tree::Tree(){
         tmp++;
  
    }
+   inputfile.close();
    std::cout << "Point 2" << std::endl;
     //read array into tree structure
     root = new Node(0);
@@ -136,6 +138,7 @@ Tree::Node* Tree::findNode(string name) {
     q.push(root);
     while (!q.empty()) {
         Node* temp = q.front();
+        std::cout << storage[temp->elements] << std::endl;
         if (storage[temp->elements].find(name) != string::npos) {
             return temp;
         }
