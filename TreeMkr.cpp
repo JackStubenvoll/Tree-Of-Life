@@ -176,7 +176,7 @@ int Tree::findDistance(string name1, string name2) {
     }
 }
 
-Node* Tree::lowestCommonAncestor(string name1, string name2) {
+Tree::Node* Tree::lowestCommonAncestor(string name1, string name2) {
     
     Node* node1 = findNode(name1);
     Node* node2 = findNode(name2);
