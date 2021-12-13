@@ -217,27 +217,27 @@ int Tree::findDistance(string name1, string name2) {
     return -1;
 }
 
-Tree::Node* Tree::lowestCommonAncestor(string name1, string name2) {
+string Tree::lowestCommonAncestor(string name1, string name2) {
     
     Node* node1 = findNode(name1);
     Node* node2 = findNode(name2);
     if (name1 == name2) {
-        return node1;
+        return storage[node1->elements];
     }
     std::vector<Node*> node1Ancestors;
     Node* curr = node1;
     while (curr != root) {
-        curr = curr->parent;
         node1Ancestors.push_back(curr);
+        curr = curr->parent;
     }
     curr = node2;
     while (curr != root) {
         curr = curr->parent;
         for (unsigned i = 0; i < node1Ancestors.size(); i++) {
             if (node1Ancestors[i] == curr) {
-                return curr;
+                return storage[curr->elements];
             }
         }
     }
-    return root;
+    return storage[root->elements];
 }

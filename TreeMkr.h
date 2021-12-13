@@ -25,7 +25,7 @@ class Tree{
     Node* findNode(string name);
     string find(string name);
     int findDistance(string name1, string name2);
-    Node* lowestCommonAncestor(string name1, string name2);
+    string lowestCommonAncestor(string name1, string name2);
     Node* root;
   private:
     int size;
