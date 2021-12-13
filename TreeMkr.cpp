@@ -5,8 +5,12 @@
 #include <sstream>
 #include <queue>
 using namespace std;
-int main()
+int main(int argc, char *argv[])
 {
+    //Tree* a = new Tree();
+	//cout<<(a);
+
+    return 0;
 }
 Tree::Tree(){
     ifstream inputfile;
@@ -33,7 +37,7 @@ Tree::Tree(){
         std::string line = storage[i];
         size_t startInd = line.find("[");
         size_t endInd = line.find("]");
-        std::string level = line.substr(startInd, endInd - startInd);
+        std::string level = line.substr(startInd+1, endInd - startInd-1);
         if (level == "kingdom") {
             //only kingdom is the first line
             currKingdom = root;
