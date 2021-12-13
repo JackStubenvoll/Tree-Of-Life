@@ -10,7 +10,8 @@ Collaboration
 However if a team member is habitually not completing their tasks, they may be asked – politely – to explain their circumstances. Based on their explanation further actions, such as alerting a staff member, may be taken on a case by case basis decided by the other team members. 
 3. Conflict Resolution-All conflicts within the team will be decided by a Super Smash Bros match, Omega Form, 3 stock no items. The winner will decide who was right and who was wrong. Carter Pobloske is not allowed to join in.
 Signed:
-Jack Stubenvoll, Jeff Shin,
+Jack Stubenvoll, 
+Jeff Shin,
 Carlos Paredes,
 Connor Schick
 
