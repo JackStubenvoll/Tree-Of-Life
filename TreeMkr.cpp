@@ -5,31 +5,20 @@
 #include <sstream>
 #include <queue>
 using namespace std;
-// int main {
-//     Tree::Tree* test;
-//     test = new Tree();
-//     std::cout << "cock and ball torture" << std::endl;
-//     std::cout << test->find("Animalia") << std::endl;
-//     return 0;
-// };
 Tree::Tree(){
     ifstream inputfile;
     std::cout << "Point 1" << std::endl;
-    //string textfile = "AnimalKingdom.txt";
-    inputfile.open("Carlos/AnimalKingdom.txt");
+    inputfile.open("TreeSlim/AnimalKingdom.txt");
     string line;
     int counter = 0;
     while(getline(inputfile, line)){
-        //std::cout << "in while loop" << std::endl;
         storage[counter] = line;
-        //cout<< "got line " << line << " " << endl;
         counter++;
  
    }
    size = counter;
    inputfile.close();
-   std::cout << "Point 2" << std::endl;
-    //read array into tree structure
+    //read array into tree structure by keeping track of most recent level
     root = new Node(0);
     Node* currKingdom = NULL;
     Node* currPhylum = NULL;
@@ -37,16 +26,11 @@ Tree::Tree(){
     Node* currOrder = NULL;
     Node* currFamily = NULL;
     Node* currGenus = NULL;
-    std::cout << "Point 3" << std::endl;
     for (unsigned i = 0; i < (unsigned int) size; i++) {
-        //std::cout << "size: " << size << std::endl;
-        //std::cout << i << std::endl;
         std::string thisLine = storage[i];
         size_t startInd = thisLine.find("[");
         size_t endInd = thisLine.find("]");
-        //std::cout << "startInd: " << startInd << " endInd: " << endInd << std::endl;
         std::string level = thisLine.substr(startInd + 1, endInd - startInd - 1);
-        //std::cout << level << std::endl;
         if (level == "kingdom") {
             //only kingdom is the first line
             currKingdom = root;
@@ -56,8 +40,6 @@ Tree::Tree(){
             //set that as parent
             //set this phylum as most recent
             Node* newPhylum = new Node(i);
-            
-            //std::cout << storage[currKingdom->elements] << " has a new child: " << storage[i] << std::endl;
             currKingdom->child.push_back(newPhylum);
             newPhylum->parent = currKingdom;
             currPhylum = newPhylum;
@@ -102,20 +84,22 @@ Tree::Tree(){
             //add species to lst of children of most recent genus
             //set that as parent
             //nothing below species
-            //std::cout << "~~~~~~~~~~~~~~" << std::endl;
             Node* newSpecies = new Node(i);
             currGenus->child.push_back(newSpecies);
             newSpecies->parent = currGenus;
         }
         
     }
-    std::cout << storage[0] << std::endl;
-    std::cout << storage[1] << std::endl;
-    std::cout << storage[2] << std::endl;
-    std::cout << storage[3] << std::endl;
-    std::cout << "Point 4" << std::endl;
 }
-
+/**
+ * searches entire tree for which node has the most connections
+ * utilizes Brandes' algorithm by assigning a connection score to each node.
+ *      Since all edges are the same weight, we can simply count the edges
+ *      and assign that as a score.
+ * then compares score of latest node in BFS to the current node with the most connections
+ * if it has more, then it is saved as the largest node
+ * if not, the BFS moves on until it finishes iterating through the entire tree
+ */
 string Tree::mostConnected(Tree::Node* subroot) {
     unsigned int largest = root->child.size();
     Node* mostConnectedNode = root;
@@ -133,61 +117,84 @@ string Tree::mostConnected(Tree::Node* subroot) {
         q.pop();
 
     }
+    //returns the corresponding string of the most connected node
     return storage[mostConnectedNode->elements];
 } 
 
+/**
+ * find function that returns the string of what is being searched for
+ *      used by main, since returning a node isn't useful.
+ * calls main find function that actually finds the node and returns it
+ * then returns the corrresponding string
+ */ 
 string Tree::find(string name) {
     std::cout << "calling find" << std:: endl;
     Node* node = findNode(name);
     return storage[node->elements];
 }
 
+/**
+ * findNode returns a node based on as string query.
+ * 
+ * not useful for a user, but very useful to return a node for other functions
+ * performs a BFS and determines if the current node in the BFS contains the
+ * query string. 
+ * 
+ * Will always return the first node it encounters that contains the query string
+ * 
+ * Since many taxons have similar names, the original text file also contains
+ * the names of the discovers (eg Acanthocephala Rudolphi, where Acanthocephala
+ * is the name of the phylum, and Rudolphi the name of the person who formally
+ * classified it). This can be used to ensure the query finds the correct node.
+ * 
+ * If a node is not found, returns NULL
+ */ 
 Tree::Node* Tree::findNode(string name) {
     std::queue<Node*> q;
     q.push(root);
     while (!q.empty()) {
         Node* temp = q.front();
-        // std::cout << "bollocks" << std::endl;
-        // std::cout << storage[temp->elements] << std::endl;
-        // std::cout << "bollocks 2" << std::endl;
-        // std::cout << storage[temp->elements].find(name) << std::endl;
-        // std::cout << string::npos << std::endl;
         if (storage[temp->elements].find(name) != string::npos) {
-            //std::cout << "returning" << std::endl;
             return temp;
         }
-        //std::cout << "size of child array: " << temp->child.size() << std::endl;
         for (unsigned i = 0; i < temp->child.size(); i++) {
             q.push(temp->child[i]);
         }
         q.pop();
 
     }
-    Node* notFound = new Node(-1);
-    return notFound;
+    return NULL;
 }
-
+/**
+ * finds the distance between two nodes (number of edges)
+ * 
+ * first uses the find function to locate both nodes.
+ * 
+ * Then, performs a BFS beginning at the first node. While doing this, keeps track
+ * of the distance that the corresponding node in the node queue is from the start 
+ * node in a separate distance queue.
+ * 
+ * Utilizes Djikstra's algorithm by performing a BFS on the graph based on the
+ * starting node, and slowly expanding outward until it finds its target,
+ * keeping track of all nodes already visited. Because all edges are 
+ * equally weighted, the distance score is always one.
+ * 
+ * Once target node is found, returns the corresponding distance from the
+ * start node.
+ */ 
 int Tree::findDistance(string name1, string name2) {
     Node* node1 = findNode(name1);
     Node* node2 = findNode(name2);
-    //std::cout << node1->elements << std::endl;
-    //std::cout << node2->elements << std::endl;
-    std::queue<Node*> nodeq;
-    std::queue<int> distq;
-    std::vector<Node*> visitedNodes;
-    nodeq.push(node1);
-    distq.push(0);
+    std::queue<Node*> nodeq; //queue that holds nodes
+    std::queue<int> distq; //queue that holds the distance of the node at the same spot in nodeq
+    std::vector<Node*> visitedNodes; // vector that holds all nodes visited so far
+    nodeq.push(node1); //pushes start node
+    distq.push(0); //pushes distance from start node to start node (always 0)
     while(!nodeq.empty()) {
-        //std::cout <<  "empty? " << nodeq.empty() << std::endl;
-        Node* curr = nodeq.front();
-        //std::cout << nodeq.front()->elements << std::endl;
-        //std::cout << curr->elements << std::endl;
-        //std::cout << "basoivba" << std::endl;
+        Node* curr = nodeq.front(); 
         int currDist = distq.front();
-        //std::cout << "after distq" << std::endl;
         string currData = storage[curr->elements];
-        //std::cout << "after currData" << std::endl;
-        bool visited = false;
+        bool visited = false; //tests if the current node has already been visited
         for (unsigned i = 0; i < visitedNodes.size(); i++) {
             string visitData = storage[visitedNodes[i]->elements];
             if (currData == visitData) {
@@ -195,36 +202,46 @@ int Tree::findDistance(string name1, string name2) {
                 break;
             }
         }
-        if (!visited) {
+        if (!visited) { //if the node has already been visted, it is immediately popped
+            //if node has not been visited, first test if this is the target node 
             if (storage[curr->elements] == storage[node2->elements]) {
                 return currDist;
             }
-
+            //if not the target node, add all of this node's children and it's parent
+            //to the queue.
             visitedNodes.push_back(curr);
-            if (curr != root) {
+            if (curr != root) { 
+                //if the current node is the root then it doesn't have a parent to add
                 nodeq.push(curr->parent);
             distq.push(currDist + 1);
             }    
             for (unsigned i = 0; i < curr->child.size(); i++) {
                 nodeq.push(curr->child[i]);
                 Node* test = nodeq.back();
-                //std::cout << test->elements << std::endl;
-                //std::cout << storage[curr->child[i]->elements] << std::endl;
                 distq.push(currDist+1);
             }
             
         }
         nodeq.pop();
         distq.pop();
-        //std::cout << "popped" << std::endl;
-        //std::cout << nodeq.size() << std::endl;
-        Node* test2 = nodeq.front();
-        //std::cout << "before next iteration " << test2->elements << std::endl;
 
     }
+    //if no path is found, return negative one.
     return -1;
 }
-
+/**
+ * finds the lowest common ancestor of two nodes
+ * 
+ * by lowest common ancestor, we mean the lowest common ancestor node
+ * NOT the latest common ancestor of two species.
+ * 
+ * adds all of the first node's ancestors to a vector minus the root
+ * then goes through all of the second node's ancestors and compares
+ * them to each entry in the vector.
+ * 
+ * If no matches, then return the root as by definition it will be
+ * the lowestCommonAncestor since both entries must be in Animalia. 
+ */
 string Tree::lowestCommonAncestor(string name1, string name2) {
     
     Node* node1 = findNode(name1);
