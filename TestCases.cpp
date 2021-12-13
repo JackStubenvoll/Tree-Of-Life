@@ -1,4 +1,4 @@
-#include "catch/catch.hpp"
+#include "cs225/catch/catch.hpp"
 #include "TreeMkr.h"
 #include <iostream>
 #include <fstream>
