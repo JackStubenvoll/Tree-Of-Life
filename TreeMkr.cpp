@@ -169,7 +169,8 @@ int Tree::findDistance(string name1, string name2) {
             }
             
         }
-        
+        nodeq.pop();
+        distq.pop();
         return -1;
 
     }
