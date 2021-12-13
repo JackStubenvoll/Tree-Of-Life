@@ -5,9 +5,6 @@
 #include <sstream>
 #include <queue>
 using namespace std;
-int main()
-{
-}
 Tree::Tree(){
     ifstream inputfile;
     //string textfile = "AnimalKingdom.txt";
@@ -96,7 +93,7 @@ Tree::Tree(){
     }
 }
 
-string Tree::mostConnected(Node* root) {
+string Tree::mostConnected(Tree::Node* subroot) {
     unsigned int largest = root->child.size();
     Node* mostConnectedNode = root;
     std::queue<Node*> q;
