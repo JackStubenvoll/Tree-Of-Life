@@ -110,6 +110,7 @@ string Tree::mostConnected(Node* root) {
         for (unsigned i = 0; i < temp->child.size(); i++) {
             q.push(temp->child.at(i));
         }
+        q.pop();
 
     }
     return storage[mostConnectedNode->elements];
@@ -126,8 +127,75 @@ Tree::Node* Tree::findNode(string name) {
         for (unsigned i = 0; i < temp->child.size(); i++) {
             q.push(temp->child.at(i));
         }
+        q.pop();
 
     }
     Node* notFound = new Node(1593759);
     return notFound;
+}
+
+int Tree::findDistance(string name1, string name2) {
+    Node* node1 = findNode(name1);
+    Node* node2 = findNode(name2);
+    std::queue<Node*> nodeq;
+    std::queue<int> distq;
+    std::vector<Node*> visitedNodes;
+    nodeq.push(node1);
+    distq.push(0);
+    while(!nodeq.empty()) {
+        Node* curr = nodeq.front();
+        int currDist = distq.front();
+        string currData = storage[curr->elements];
+        bool visited = false;
+        for (unsigned i = 0; i < visitedNodes.size(); i++) {
+            string visitData = storage[visitedNodes[i]->elements];
+            if (currData == visitData) {
+                visited = true;
+                break;
+            }
+        }
+        if (!visited) {
+            if (storage[curr->elements] == storage[node2->elements]) {
+                return currDist;
+            }
+
+            visitedNodes.push_back(curr);
+                
+            nodeq.push(curr->parent);
+            distq.push(currDist + 1);
+            for (unsigned i = 0; i < curr->child.size(); i++) {
+                nodeq.push(curr->child[i]);
+                distq.push(currDist+1);
+            }
+            
+        }
+        
+        return -1;
+
+    }
+}
+
+Node* Tree::lowestCommonAncestor(string name1, string name2) {
+    
+    Node* node1 = findNode(name1);
+    Node* node2 = findNode(name2);
+    if (name1 = name2) {
+        return node1;
+    }
+    std::vector<Node*> node1Ancestors;
+    Node* curr = node1;
+    while (curr != root) {
+        curr = curr->parent;
+        node1Ancestors.push_back(curr);
+    }
+    curr = node2;
+    while (curr != root) {
+        curr = curr->parent;
+        for (unsigned i = 0; i < node1Ancestors.size(); i++) {
+            if (node1Ancestors[i] == curr) {
+                return curr;
+            }
+        }
+    }
+    return root;
 }
