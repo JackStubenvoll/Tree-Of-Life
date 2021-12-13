@@ -7,7 +7,7 @@ https://github-dev.cs.illinois.edu/cs225-fa21/cschick3-cfp3-jackts2-wonjong2
 
 - - - - 
 ## Areas to get done
-Six areas to complete
+There are total six areas to complete. 
 1. read/writing File
 2. Find a Node
 3. Find a Node’s parent
@@ -15,10 +15,10 @@ Six areas to complete
 5. Distance between two nodes
 6. Find most connected node
 
-### Several of these areas can be compressed and done by one person
-Find a Node + Find a Node’s Parent
+#### Several of these areas can be compressed and done by one person
+- Find a Node + Find a Node’s Parent
+- Distance between two nodes + lowestCommonGrouping
 
-Distance between two nodes + lowestCommonGrouping
 Overall, four areas to complete, one for each person
 - Read/Write File -> Carlos Paredes
 - FindNode, FindParent -> Connor Schick
