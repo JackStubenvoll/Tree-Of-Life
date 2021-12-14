@@ -23,7 +23,7 @@ To run the file, we used `make` to compile the code and `./treemaker` to run the
 - Find
     - input string in query to see what you want to look it up
 - Most Connected
-    - input string (such as primates) in query to see which node has most connections
+    - input string (ex. primates) in query to see which node has most connections
 - Find Distance
     - input string of both nodes in each query to see the distance between two nodes
 - Lowest Common Ancestor
