@@ -17,7 +17,7 @@ Contributors: Connor Schick (cschick3), Carlos Paredes (cfp3), Jack Stubenvoll (
 - - - -
 ## Overview
 The source of the data set is acquired from https://www.catalogueoflife.org/data/download. 
-To run the file, we used `make main` to compile the code and `./main` to run the main which includes the functions. To compile tests, we use `make test` and `./test` to run the tests.
+To run the file, we used `make` to compile the code and `./treemaker` to run the main which includes the functions. To compile tests, we use `make test` and `./test` to run the tests.
 
 Our presentation slide can be find via Google Slides:https://docs.google.com/presentation/d/1-fXQlNdQwU7Yw4SVIQABn7BgezfMNkAW89GBAotOFCc/edit?usp=sharing
 Our presentation video can be find via Youtube: https://youtu.be/KlfxNKt7SA4
