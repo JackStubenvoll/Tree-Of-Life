@@ -100,10 +100,10 @@ Tree::Tree(){
  * if not, the BFS moves on until it finishes iterating through the entire tree
  */
 string Tree::mostConnected(Tree::Node* subroot) {
-    unsigned int largest = root->child.size();
-    Node* mostConnectedNode = root;
+    unsigned int largest = subroot->child.size();
+    Node* mostConnectedNode = subroot;
     std::queue<Node*> q;
-    q.push(root);
+    q.push(subroot);
     while (!q.empty()) {
         Node* temp = q.front();
         if (temp->child.size() > largest) {
