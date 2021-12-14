@@ -21,6 +21,7 @@ class Tree{
     Tree(const Tree& other);
     ~Tree();
     const Tree& operator=(const Tree& rhs);
+    string mostConnected(string query);
     string mostConnected(Node* subroot);
     Node* findNode(string name);
     string find(string name);
