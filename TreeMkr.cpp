@@ -129,7 +129,7 @@ string Tree::mostConnected(Tree::Node* subroot) {
 string Tree::find(string name) {
     Node* node = findNode(name);
     if (node == NULL) {
-        return "";
+        return "Query not found";
     }
     return storage[node->elements];
 }
@@ -221,7 +221,7 @@ int Tree::findDistance(string name1, string name2) {
             }    
             for (unsigned i = 0; i < curr->child.size(); i++) {
                 nodeq.push(curr->child[i]);
-                Node* test = nodeq.back();
+                //Node* test = nodeq.back();
                 distq.push(currDist+1);
             }
             
