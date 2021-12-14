@@ -90,6 +90,21 @@ Tree::Tree(){
         
     }
 }
+
+Tree::~Tree() {
+    clear(root);
+}
+
+void Tree::clear(Tree::Node* subroot) {
+    if (subroot == NULL) {
+        return;
+    }
+    for (unsigned i = 0; i < subroot->child.size(); i++) {
+        clear(subroot->child[i]);
+    }
+
+    delete subroot;
+}
 /**
  * searches entire tree for which node has the most connections
  * utilizes Brandes' algorithm by assigning a connection score to each node.
@@ -181,7 +196,6 @@ Tree::Node* Tree::findNode(string name) {
  * finds the distance between two nodes (number of edges)
  * 
  * first uses the find function to locate both nodes.
- * 
  * 
  * Utilizes Djikstra's algorithm on the graph based on the
  * starting node, and slowly expanding outward until it finds its target,
@@ -282,17 +296,4 @@ string Tree::lowestCommonAncestor(string name1, string name2) {
     return storage[root->elements];
 }
 
-Tree::~Tree() {
-    clear(root);
-}
 
-void Tree::clear(Tree::Node* subroot) {
-    if (subroot == NULL) {
-        return;
-    }
-    for (unsigned i = 0; i < subroot->child.size(); i++) {
-        clear(subroot->child[i]);
-    }
-
-    delete subroot;
-}
