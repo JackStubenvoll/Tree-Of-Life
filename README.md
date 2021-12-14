@@ -17,6 +17,7 @@ Contributors: Connor Schick (cschick3), Carlos Paredes (cfp3), Jack Stubenvoll (
 - - - -
 ## Overview
 The source of the data set is acquired from https://www.catalogueoflife.org/data/download. 
+
 To run the file, we used `make` to compile the code and `./treemaker` to run the main which includes the functions.
 
 #### Manually input the desired data
