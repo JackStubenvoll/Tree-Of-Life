@@ -118,7 +118,18 @@ string Tree::mostConnected(Tree::Node* subroot) {
     }
     //returns the corresponding string of the most connected node
     return storage[mostConnectedNode->elements];
-} 
+}
+/**
+ * allows user to search for a node in the tree as opposed to having to pass
+ * a node 
+ */
+string Tree::mostConnected(string query) {
+    Node* node = findNode(query);
+    if (node == NULL) {
+        return "query not found";
+    }
+    return mostConnected(node);
+}
 
 /**
  * find function that returns the string of what is being searched for
@@ -171,14 +182,11 @@ Tree::Node* Tree::findNode(string name) {
  * 
  * first uses the find function to locate both nodes.
  * 
- * Then, performs a BFS beginning at the first node. While doing this, keeps track
- * of the distance that the corresponding node in the node queue is from the start 
- * node in a separate distance queue.
  * 
- * Utilizes Djikstra's algorithm by performing a BFS on the graph based on the
+ * Utilizes Djikstra's algorithm on the graph based on the
  * starting node, and slowly expanding outward until it finds its target,
  * keeping track of all nodes already visited. Because all edges are 
- * equally weighted, the distance score is always one.
+ * equally weighted, the distance score from one node to the next is always one.
  * 
  * Once target node is found, returns the corresponding distance from the
  * start node.
@@ -251,7 +259,7 @@ string Tree::lowestCommonAncestor(string name1, string name2) {
     Node* node1 = findNode(name1);
     Node* node2 = findNode(name2);
     if (node1 == NULL || node2 == NULL) {
-        return "";
+        return "one of these queries does not exist";
     }
     if (name1 == name2) {
         return storage[node1->elements];
